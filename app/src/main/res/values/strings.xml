@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ClearSpotAiDemo</string>
+
+    <string name="title_select_yuv_format">Select Image Format</string>
+    <string name="title_select_yuv_format_ok">OK</string>
+    <string name="title_select_yuv_format_cancel">Cancel</string>
+
 </resources>

@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.metromart.repositoriesapp.R
+import com.zw.clearspotaidemo.pages.CameraStreamDetailFragment
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 
 class CameraStreamListFragment : Fragment() {
 
     private lateinit var llCameraList: LinearLayout
-
     private val viewModule: CameraStreamListVM by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
