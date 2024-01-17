@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.metromart.repositoriesapp.R
@@ -15,6 +16,7 @@ import dji.sdk.keyvalue.value.common.ComponentIndexType
 class CameraStreamListFragment : Fragment() {
 
     private lateinit var llCameraList: LinearLayout
+    private lateinit var tvNoData : TextView
     private val viewModule: CameraStreamListVM by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -24,8 +26,14 @@ class CameraStreamListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         llCameraList = view.findViewById(R.id.ll_camera_preview_list)
+        tvNoData = view.findViewById(R.id.tvNoData)
         viewModule.availableCameraListData.observe(viewLifecycleOwner) { availableCameraList ->
             updateAvailableCamera(availableCameraList)
+            if (availableCameraList.isEmpty()) {
+                tvNoData.visibility = View.VISIBLE
+            } else {
+                tvNoData.visibility = View.GONE
+            }
         }
     }
 

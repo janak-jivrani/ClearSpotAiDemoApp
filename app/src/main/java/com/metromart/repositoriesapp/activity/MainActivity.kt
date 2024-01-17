@@ -7,14 +7,11 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.lifecycleScope
-import com.metromart.repositoriesapp.R
 import com.metromart.repositoriesapp.databinding.ActivityMainBinding
 import com.metromart.repositoriesapp.extensions.gone
 import com.metromart.repositoriesapp.extensions.visible
 import com.metromart.repositoriesapp.fragments.ImagesFragment
+import com.zw.clearspotaidemo.util.FragmentNavUtils
 import dagger.hilt.android.AndroidEntryPoint
 import dji.v5.common.error.IDJIError
 import dji.v5.common.register.DJISDKInitEvent
@@ -22,8 +19,6 @@ import dji.v5.manager.SDKManager
 import dji.v5.manager.interfaces.SDKManagerCallback
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.PermissionUtil
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -75,10 +70,10 @@ class MainActivity : AppCompatActivity() {
     private fun registerApp() {
         SDKManager.getInstance().init(this, object : SDKManagerCallback {
             override fun onRegisterSuccess() {
-                lifecycleScope.launch(Dispatchers.Main) {
+                runOnUiThread {
                     binding.progressBar.gone()
                     binding.fragmentContainer.visible()
-                    loadFragment(ImagesFragment())
+                    FragmentNavUtils.loadFragment(ImagesFragment(),this@MainActivity)
                 }
                 Log.i(TAG, "myApp onRegisterSuccess")
             }
@@ -145,10 +140,5 @@ class MainActivity : AppCompatActivity() {
         requestPermissionLauncher.launch(permissionArray.toArray(arrayOf()))
     }
 
-    fun <T : Fragment> loadFragment(fragment: T) {
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainer, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
+
 }

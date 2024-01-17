@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_camera_preview_list"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/flMain"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:divider="@drawable/divider_camera_stream_list"
-    android:orientation="horizontal"
-    android:showDividers="middle" />
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_camera_preview_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider_camera_stream_list"
+        android:orientation="horizontal"
+        android:showDividers="middle" />
+
+    <TextView
+        android:id="@+id/tvNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:text="No any camera available yet"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+</FrameLayout>
